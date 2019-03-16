@@ -128,7 +128,7 @@ class CommandData
         $this->addPrimaryKey();
 
         while (true) {
-            $fieldInputStr = $this->commandObj->ask('Field: (name db_type html_type options)', '');
+            $fieldInputStr = $this->commandObj->ask('Field: (name title db_type html_type options)', '');
 
             if (empty($fieldInputStr) || $fieldInputStr == false || $fieldInputStr == 'exit') {
                 break;
@@ -171,6 +171,7 @@ class CommandData
         }
         $primaryKey->parseDBType('increments');
         $primaryKey->parseOptions('s,f,p,if,ii');
+        $primaryKey->fieldTitle = 'ID';
 
         $this->fields[] = $primaryKey;
     }
@@ -181,12 +182,14 @@ class CommandData
         $createdAt->name = 'created_at';
         $createdAt->parseDBType('timestamp');
         $createdAt->parseOptions('s,f,if,ii');
+        $createdAt->fieldTitle = 'Vytvořeno';
         $this->fields[] = $createdAt;
 
         $updatedAt = new GeneratorField();
         $updatedAt->name = 'updated_at';
         $updatedAt->parseDBType('timestamp');
         $updatedAt->parseOptions('s,f,if,ii');
+	    $updatedAt->fieldTitle = 'Aktualizované';
         $this->fields[] = $updatedAt;
     }
 
