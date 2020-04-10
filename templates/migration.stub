@@ -27,4 +27,5 @@ class Create$TABLE_NAME_TITLE$Table extends Migration
     {
         Schema::drop('$TABLE_NAME$');
     }
+
 }

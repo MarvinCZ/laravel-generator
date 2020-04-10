@@ -1,0 +1,103 @@
+<?php
+
+namespace $NS_PREFIX$\Policies;
+
+use App\Models\User;
+use $MODEL_PREFIX$\$MODEL_NAME$;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class $MODEL_NAME$Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view the $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @param  $MODEL_NAME$ $$MODEL_CAMEL$
+     * @return bool
+     */
+    public function view(User $user, $MODEL_NAME$ $$MODEL_CAMEL$)
+    {
+    	if ($user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.view')) {
+    	    return TRUE;
+    	}
+    	return $user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.view_own') && $$MODEL_CAMEL$->user->is($user);
+    }
+
+	/**
+	 * Determine whether the user can view the $MODEL_SMALL$.
+	 *
+	 * @param  User $user
+	 * @return bool
+	 */
+	public function index(User $user)
+	{
+		return $user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.index');
+	}
+
+    /**
+     * Determine whether the user can create $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @return bool
+     */
+    public function create(User $user)
+    {
+	    return $user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.create');
+    }
+
+    /**
+     * Determine whether the user can update the $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @param  $MODEL_NAME$  $$MODEL_CAMEL$
+     * @return bool
+     */
+    public function update(User $user, $MODEL_NAME$ $$MODEL_CAMEL$)
+    {
+    	if ($user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.update')) {
+    	    return TRUE;
+    	}
+    	return $user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.update_own') && $$MODEL_CAMEL$->user->is($user);
+    }
+
+    /**
+     * Determine whether the user can delete the $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @param  $MODEL_NAME$  $$MODEL_CAMEL$
+     * @return bool
+     */
+    public function delete(User $user, $MODEL_NAME$ $$MODEL_CAMEL$)
+    {
+    	if ($user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.delete')) {
+    	    return TRUE;
+    	}
+    	return $user->can('$PERMISSION_PREFIX$.$MODEL_SMALL$.delete_own') && $$MODEL_CAMEL$->user->is($user);
+    }
+
+    /**
+     * Determine whether the user can restore the $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @param  $MODEL_NAME$  $$MODEL_CAMEL$
+     * @return bool
+     */
+    public function restore(User $user, $MODEL_NAME$ $$MODEL_CAMEL$)
+    {
+	    return FALSE;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the $MODEL_SMALL$.
+     *
+     * @param  User $user
+     * @param  $MODEL_NAME$  $$MODEL_CAMEL$
+     * @return bool
+     */
+    public function forceDelete(User $user, $MODEL_NAME$ $$MODEL_CAMEL$)
+    {
+    	return FALSE;
+    }
+}
